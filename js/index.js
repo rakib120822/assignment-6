@@ -33,6 +33,7 @@ const showDetailsBtn = (id) => {
 // details show
 const showDetails = (plants) => {
   const detailsContainer = document.getElementById("details-container");
+  detailsContainer.innerHTML = "";
   const div = document.createElement("div");
   div.innerHTML = `
     <div class="flex flex-col justify-between">
