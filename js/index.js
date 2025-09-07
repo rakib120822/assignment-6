@@ -1,0 +1,138 @@
+//all data load
+const dataLoad = () => {
+    fetch("https://openapi.programming-hero.com/api/plants")
+        .then(res => res.json())
+        .then(data => {
+            displayData(data.plants)
+        });
+    
+    fetch("https://openapi.programming-hero.com/api/categories")
+        .then(res => res.json())
+    .then(data=>categoryDisplay(data.categories))
+}
+
+// data display
+const displayData = (plants) => {
+    const cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = "";
+    plants.forEach(plant => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <div id="card" class="p-4 flex flex-col  rounded-lg gap-2 bg-white shadow-md hover:shadow-xl ">
+                    <div class="  rounded-lg"><img src="${plant.image}" alt="" class="rounded-lg" /></div>
+                    <div >
+                        <div class="my-1">
+                        <h2 id="title" class="text-[0.875rem] font-semibold">${plant.name}</h2>
+                        <p id="description" class="text-[0.75rem] text-[#1f2937] opacity-80">${plant.description}</p>
+                    </div>
+                    <div class="flex justify-between items-center my-3">
+                        <span id="type" class="px-3 py-1 rounded-2xl bg-[#dcfce7] text-[#15803d]">${plant.category}</span>
+
+                        <p class="text-[#1f2937]  mt-2 text-[0.875rem] font-semibold">&#2547<span id="price">${plant.price}</span> </p>
+                    </div>
+                    </div>
+                     <button  class="add-to-cart-btn bg-[#15803d]   text-white p-4 rounded-4xl">Add to Cart</button>
+                </div>
+    `
+
+        cardContainer.append(div);
+    });
+
+    // add to cart
+    const btns = document.querySelectorAll(".add-to-cart-btn");
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const title = btn.parentNode.children[1].children[0].children[0].innerText;
+            const price = Number(btn.parentNode.children[1].children[1].children[1].children[0].innerText)
+            displayCart(title, price);
+        })
+    })
+}
+
+const displayCart = (title, price) => {
+    const cartContainer = document.getElementById("cart-container");
+    const div = document.createElement("div");
+    div.className = "bg-[#f0fdf4] rounded-lg flex justify-between items-center py-2 px-3";
+    div.innerHTML = `
+                        <div>
+                            <p class="text-[0.875rem] font-semibold">${title}</p>
+                            <p class="text-[#1f2937] opacity-50 mt-2">&#2547<span>${price}</span></p>
+                        </div>
+                        <span   class="deleteBtn text-[#1f2937] opacity-50">
+                            <i class="fa-solid fa-xmark"></i>
+                        </span>
+                        
+                    
+    `
+    cartContainer.append(div)
+    //update cart
+    const totalPrice = document.getElementById("total-price");
+    let totalAmount = Number(totalPrice.innerText);
+    totalPrice.innerText = totalAmount + price;
+
+    //delete cart
+    const deleteBtn = div.querySelector(".deleteBtn");
+    deleteBtn.addEventListener("click", () => {
+            totalAmount = Number(totalPrice.innerText);
+            totalPrice.innerText = totalAmount - price
+            div.remove()
+            
+        })
+    
+
+    
+    
+    
+}
+
+
+
+//category button toggle
+const toggleCategory = (id) => {
+    const categoryCards = document.querySelectorAll('.category-card');
+    categoryCards.forEach(categoryCard => {
+        categoryCard.classList.remove("active");
+    })
+    const categoryCard = document.getElementById(`category-card-${id}`)
+    categoryCard.classList.add("active");
+}
+
+//display category base plant
+const displayCategoryPlant = (id) => {
+    if (id === 0) {
+        toggleCategory(id)
+        dataLoad()
+        return;
+    }
+    
+    fetch(`https://openapi.programming-hero.com/api/category/${id}`)
+    .then(res => res.json())
+        .then(data => {
+            displayData(data.plants)
+            toggleCategory(id)
+        }
+        )
+    
+}
+
+// category show
+const categoryDisplay = (categories) => {
+     const categoryContainer = document.getElementById("categories-container");
+    categoryContainer.innerHTML = `<div id="category-card-0" onclick="displayCategoryPlant(${0})" class="category-card px-3 py-2 hover:bg-[#15803d] active hover:text-white">All category</div>`; 
+    categories.forEach(category => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <div id="category-card-${category.id}" onclick="displayCategoryPlant('${category.id}')" class="category-card px-3 py-2 hover:bg-[#15803d] hover:text-white">${category.category_name}</div>
+        `
+        categoryContainer.append(div)
+    })
+}
+
+// add to cart
+const addToCart = (name, price) => {
+    console.log(name, price)
+}
+
+
+
+dataLoad();
