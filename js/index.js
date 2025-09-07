@@ -1,5 +1,4 @@
-//all data load
-
+//spinner load function
 const manageSpinner = (status) => {
   if (status === true) {
     document.getElementById("spinner").classList.remove("hidden");
@@ -10,6 +9,7 @@ const manageSpinner = (status) => {
   }
 };
 
+//all data load
 const dataLoad = () => {
   manageSpinner(true);
   fetch("https://openapi.programming-hero.com/api/plants")
@@ -25,18 +25,16 @@ const dataLoad = () => {
 
 //detail Show btn
 const showDetailsBtn = (id) => {
-    fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
-        .then(res => res.json())
-    .then(data=> showDetails(data.plants))
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((data) => showDetails(data.plants));
 };
-
 
 // details show
 const showDetails = (plants) => {
-    
-     const detailsContainer = document.getElementById("details-container");
-    const div = document.createElement("div");
-    div.innerHTML = `
+  const detailsContainer = document.getElementById("details-container");
+  const div = document.createElement("div");
+  div.innerHTML = `
     <div class="flex flex-col justify-between">
     <h1 class="text-2xl font-semibold mb-4">${plants.name}</h1>
     <div class="h-[300px] w-[300px] mb-4"><img src="${plants.image}" alt="image" class="w-full h-full object-cover"></div>
@@ -46,13 +44,11 @@ const showDetails = (plants) => {
         <p><span class="text-2xl font-semibold">Description: </span><span class="text-[#1f2937] opacity-80"> ${plants.description}</span> </p>
     </div>
 </div>
-    `
+    `;
 
-    detailsContainer.append(div);
-    my_modal_4.showModal()
-}
-
-
+  detailsContainer.append(div);
+  my_modal_4.showModal();
+};
 
 // data display
 const displayData = (plants) => {
@@ -169,9 +165,7 @@ const categoryDisplay = (categories) => {
 
 // add to cart
 const addToCart = (name, price) => {
-    console.log(name, price)
-}
-
-
+  console.log(name, price);
+};
 
 dataLoad();
