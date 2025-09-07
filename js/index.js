@@ -18,10 +18,10 @@ const displayData = (plants) => {
     plants.forEach(plant => {
         const div = document.createElement("div");
         div.innerHTML = `
-        <div id="card" class="p-4 flex flex-col  rounded-lg gap-2 bg-white shadow-md hover:shadow-xl ">
-                    <div class="  rounded-lg"><img src="${plant.image}" alt="" class="rounded-lg" /></div>
-                    <div >
-                        <div class="my-1">
+        <div id="card" class="p-4 flex flex-col  rounded-lg gap-2 bg-white shadow-md hover:shadow-xl h-[600px]">
+                    <div class="h-1/2 rounded-lg"><img src="${plant.image}" alt="" class="rounded-lg h-full w-full object-cover" /></div>
+                    <div class="h-1/2 flex flex-col justify-between">
+                        <div class="my-3">
                         <h2 id="title" class="text-[0.875rem] font-semibold">${plant.name}</h2>
                         <p id="description" class="text-[0.75rem] text-[#1f2937] opacity-80">${plant.description}</p>
                     </div>
@@ -33,7 +33,7 @@ const displayData = (plants) => {
                     </div>
                      <button  class="add-to-cart-btn bg-[#15803d]   text-white p-4 rounded-4xl">Add to Cart</button>
                 </div>
-    `
+    `;
 
         cardContainer.append(div);
     });
