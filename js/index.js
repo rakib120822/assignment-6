@@ -65,7 +65,7 @@ const displayData = (plants) => {
                         <p id="description" class="text-[0.75rem] text-[#1f2937] opacity-80">${plant.description}</p>
                     </div>
                     <div class="flex justify-between items-center my-3">
-                        <span id="type" class="px-3 py-1 rounded-2xl bg-[#dcfce7] text-[#15803d]">${plant.category}</span>
+                        <span id="type" class="px-2 py-1 rounded-2xl bg-[#dcfce7] text-[#15803d]">${plant.category}</span>
 
                         <p class="text-[#1f2937]  mt-2 text-[0.875rem] font-semibold">&#2547<span id="price">${plant.price}</span> </p>
                     </div>
