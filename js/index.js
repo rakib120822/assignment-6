@@ -135,7 +135,7 @@ const toggleCategory = (id) => {
 
 //display category base plant
 const displayCategoryPlant = (id) => {
-  if (id === 0) {
+  if (Number(id) === 0) {
     toggleCategory(id);
     dataLoad();
     return;
