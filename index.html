@@ -74,9 +74,12 @@ generations.</p>
     </header>
 
     <!-- main_grid_about_section -->
-    <main class="bg-[#f0fdf4]">
+    <main class="bg-[#f0fdf4] ">
+         
+        
+            
         <!-- card_section -->
-        <section class="w-11/12  mx-auto grid grid-cols-12 gap-5 md:gap-8 py-[100px]">
+        <section class="w-11/12  mx-auto grid grid-cols-12 gap-3 md:gap-5 py-[100px]">
             <!-- categories_section -->
             <aside id="categories" class="col-span-12 md:col-span-2">
                 <h2 class="text-[1.25rem] font-semibold text-black mb-4">Categories</h2>
@@ -85,16 +88,14 @@ generations.</p>
                     
                 </div>
             </aside>
-
-            <!-- spinner_section -->
-            <section class="flex justify-center items-center hidden w-[300px] " id="spinner"><span class="loading loading-spinner loading-xl "></span></section>
             <!-- grid_section -->
-            <section  class="col-span-12 md:col-span-7">
-                
+            <section  class="col-span-12 md:col-span-7 ">
+                <!-- spinner_section -->
+                <section class="flex justify-center items-center hidden   col-span-12 md:col-span-7 h-[50vh]" id="spinner"><span class="loading loading-spinner loading-xl "></span></section>
                 <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-3">
                 </div>
             </section>
-
+            
             <!-- cart_section -->
             <aside id="cart-section" class="col-span-12 md:col-span-3 bg-white rounded-lg p-4">
                 <h2 class="text-[1.25rem] font-semibold mb-4">Your Cart</h2>
@@ -129,6 +130,24 @@ generations.</p>
         
         </section>
     </main>
+
+
+    <!-- modal_section -->
+     <!-- You can open the modal using ID.showModal() method -->
+
+<dialog id="my_modal_4" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <section id="details-container">
+
+         </section>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
 
 
@@ -180,6 +199,10 @@ generations.</p>
     <script src="./js/index.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 

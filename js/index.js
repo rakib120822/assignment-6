@@ -23,6 +23,37 @@ const dataLoad = () => {
     .then((data) => categoryDisplay(data.categories));
 };
 
+//detail Show btn
+const showDetailsBtn = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+        .then(res => res.json())
+    .then(data=> showDetails(data.plants))
+};
+
+
+// details show
+const showDetails = (plants) => {
+    
+     const detailsContainer = document.getElementById("details-container");
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <div class="flex flex-col justify-between">
+    <h1 class="text-2xl font-semibold mb-4">${plants.name}</h1>
+    <div class="h-[300px] w-[300px] mb-4"><img src="${plants.image}" alt="image" class="w-full h-full object-cover"></div>
+    <div class="my-4">
+        <p><span class="text-2xl font-semibold my-2">Category: </span><span class="text-[#1f2937] opacity-80"> ${plants.category}</span> </p>
+        <p><span class="text-2xl font-semibold my-2">Price: </span><span class="text-[#1f2937] opacity-80">&#2547 ${plants.price}</span> </p>
+        <p><span class="text-2xl font-semibold">Description: </span><span class="text-[#1f2937] opacity-80"> ${plants.description}</span> </p>
+    </div>
+</div>
+    `
+
+    detailsContainer.append(div);
+    my_modal_4.showModal()
+}
+
+
+
 // data display
 const displayData = (plants) => {
   const cardContainer = document.getElementById("card-container");
@@ -30,11 +61,11 @@ const displayData = (plants) => {
   plants.forEach((plant) => {
     const div = document.createElement("div");
     div.innerHTML = `
-        <div id="card" class="p-4 flex flex-col  rounded-lg gap-2 bg-white shadow-md hover:shadow-xl h-[600px]">
+        <div  id="card" class="p-4 flex flex-col  rounded-lg gap-2 bg-white shadow-md hover:shadow-xl h-[600px]">
                     <div class="h-1/2 w-full rounded-lg"><img src="${plant.image}" alt="" class="rounded-lg h-full w-full object-cover" /></div>
                     <div class="h-1/2 flex flex-col justify-between">
                         <div class="my-3">
-                        <h2 id="title" class="text-[0.875rem] font-semibold">${plant.name}</h2>
+                        <h2 onclick="showDetailsBtn(${plant.id})" id="title" class="text-[0.875rem] font-semibold">${plant.name}</h2>
                         <p id="description" class="text-[0.75rem] text-[#1f2937] opacity-80">${plant.description}</p>
                     </div>
                     <div class="flex justify-between items-center my-3">
