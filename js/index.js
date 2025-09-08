@@ -71,7 +71,7 @@ const displayData = (plants) => {
                         <p class="text-[#1f2937]  mt-2 text-[0.875rem] font-semibold">&#2547<span id="price">${plant.price}</span> </p>
                     </div>
                     </div>
-                     <button  class="add-to-cart-btn bg-[#15803d]   text-white p-4 rounded-4xl">Add to Cart</button>
+                     <button class="add-to-cart-btn bg-[#15803d]   text-white p-4 rounded-4xl">Add to Cart</button>
                 </div>
     `;
 
@@ -88,6 +88,7 @@ const displayData = (plants) => {
       const price = Number(
         btn.parentNode.children[1].children[1].children[1].children[0].innerText
       );
+      alert(`${title} has been added to the cart.`);
       displayCart(title, price);
     });
   });
@@ -164,9 +165,6 @@ const categoryDisplay = (categories) => {
   });
 };
 
-// add to cart
-const addToCart = (name, price) => {
-  console.log(name, price);
-};
+
 
 dataLoad();
